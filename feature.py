@@ -17,10 +17,9 @@ for feature in (rmse, chroma_stft, spec_cent, spec_bw, rolloff, zcr, mfcc):
       with open ('feature.csv', 'a') as csvfile:
             abc = np.mean(feature)
             print(abc)
-            fieldnames = ['rmse', 'chroma_stft', 'spec_cent', 'spec_bw', 'rolloff', 'zcr', 'mfcc']
+            fieldnames = ['chroma_stft', 'spec_cent', 'spec_bw', 'rolloff', 'zcr', 'mfcc']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            writer.writerow({'rmse':np.mean(rmse),
-                             'chroma_stft':np.mean(chroma_stft),
+            writer.writerow({'chroma_stft':np.mean(chroma_stft),
                              'spec_cent': np.mean(spec_cent),
                              'spec_bw': np.mean(spec_bw),
                              'rolloff': np.mean(rolloff),
