@@ -6,6 +6,32 @@ import librosa
 import numpy as np
 import csv
 warnings.simplefilter("ignore", DeprecationWarning)
+
+SR = 44000
+N_FFT = 2048
+HOP_LENGTH = 512
+N_MELS = 60
+SILENCE = 0.0018
+SAMPLE_LENGTH = 0.5 #s
+SAMPLE_SIZE = int(np.ceil(SR*SAMPLE_LENGTH))
+NOISE_RATIO = 0.25
+
+def load_audio(path):
+    signal, rate = librosa.load(path, sr=SR)
+    mask = envelope(signal, rate, SILENCE)
+    signal = signal[mask]
+    return signal
+def melspectrogram(signal):
+    signal = librosa.util.normalize(signal)
+    spectro = librosa.feature.melspectrogram(
+        signal,
+        sr=SR,
+        n_mels=N_MELS,
+        n_fft=N_FFT
+    )
+    spectro = librosa.power_to_db(spectro)
+    spectro = spectro.astype(np.float32)
+    return spectro
 def graph_spectrogram(wav_file):
     sound_info, frame_rate = get_wav_info(wav_file)
     pylab.figure(num=None, figsize=(10, 5))
