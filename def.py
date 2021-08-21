@@ -2,10 +2,13 @@ import os
 import wave
 import pylab
 import warnings
+import matplotlib.pyplot as plt
 import librosa
 import numpy as np
 import csv
+import pathlib
 warnings.simplefilter("ignore", DeprecationWarning)
+warnings.filterwarnings('ignore')
 
 SR = 44000
 N_FFT = 2048
@@ -16,22 +19,6 @@ SAMPLE_LENGTH = 0.5 #s
 SAMPLE_SIZE = int(np.ceil(SR*SAMPLE_LENGTH))
 NOISE_RATIO = 0.25
 
-def load_audio(path):
-    signal, rate = librosa.load(path, sr=SR)
-    mask = envelope(signal, rate, SILENCE)
-    signal = signal[mask]
-    return signal
-def melspectrogram(signal):
-    signal = librosa.util.normalize(signal)
-    spectro = librosa.feature.melspectrogram(
-        signal,
-        sr=SR,
-        n_mels=N_MELS,
-        n_fft=N_FFT
-    )
-    spectro = librosa.power_to_db(spectro)
-    spectro = spectro.astype(np.float32)
-    return spectro
 def graph_spectrogram(wav_file):
     sound_info, frame_rate = get_wav_info(wav_file)
     pylab.figure(num=None, figsize=(10, 5))
@@ -46,6 +33,19 @@ def get_wav_info(wav_file):
     frame_rate = wav.getframerate()
     wav.close()
     return sound_info, frame_rate
+def spec_wav():
+    # create spec image from wav folder
+    results = ['positive', 'negative']
+    for res in results: 
+        pathlib.Path(f"spectrograms/{res}").mkdir(parents=True, exist_ok=True)
+        for files in os.listdir(f"data/{res}"):
+            filename = f"data/{res}/{files}"
+            print(filename)
+            x, sr = librosa.load(filename, mono=True)
+            plt.specgram(x, NFFT=2048, Fs=2, Fc=0, noverlap=128, cmap='inferno', sides='default', mode='default', scale='dB');
+            plt.axis('off');
+            plt.savefig(f"spectrograms/{res}/{files[:-4]}.png")
+            plt.clf()
 def write_to_csv(filename='dataset.csv', dir_path='data'):
     #Create the header for the CSV File 
     header = 'filename ID chroma_stft rmse spectral_centroid spectral_bandwidth rolloff zero_crossing_rate'
@@ -62,8 +62,9 @@ def write_to_csv(filename='dataset.csv', dir_path='data'):
     for res in results: 
         for files in os.listdir(f"{dir_path}/{res}"):
             patient_id = files.split("_")[0]
-            filename = f"{dir_path}/{res}/{files}"
-            x, sr = librosa.load(filename, mono=True)
+            filenames = f"{dir_path}/{res}/{files}"
+            print(filenames)
+            x, sr = librosa.load(filenames, mono=True)
             rmse = librosa.feature.rms(y=x)
             chroma_stft = librosa.feature.chroma_stft(y=x, sr=sr)
             spec_cent = librosa.feature.spectral_centroid(y=x, sr=sr)
@@ -71,7 +72,7 @@ def write_to_csv(filename='dataset.csv', dir_path='data'):
             rolloff = librosa.feature.spectral_rolloff(y=x, sr=sr)
             zcr = librosa.feature.zero_crossing_rate(x)
             mfcc = librosa.feature.mfcc(y=x, sr=sr)
-            to_append = f'{filename} {patient_id} {np.mean(chroma_stft)} {np.mean(rmse)} {np.mean(spec_cent)} {np.mean(spec_bw)} {np.mean(rolloff)} {np.mean(zcr)}'    
+            to_append = f'{filenames} {patient_id} {np.mean(chroma_stft)} {np.mean(rmse)} {np.mean(spec_cent)} {np.mean(spec_bw)} {np.mean(rolloff)} {np.mean(zcr)}'    
             for k in mfcc:
                 to_append += f' {np.mean(k)}'
             to_append += f' {res}'
@@ -79,5 +80,7 @@ def write_to_csv(filename='dataset.csv', dir_path='data'):
             with file:
                 writer = csv.writer(file)
                 writer.writerow(to_append.split())
-graph_spectrogram('cough.wav')
-get_wav_info('cough.wav')
+#graph_spectrogram('cough.wav')
+#get_wav_info('cough.wav')
+#write_to_csv()
+#spec_wav()
