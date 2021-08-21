@@ -7,7 +7,7 @@ import librosa
 import numpy as np
 import argparse
 from define import *
-
+from check import *
 def get_args():
     parser = argparse.ArgumentParser(prog="Phát hiện virus qua tiếng ho",description="Detect Virus via Cough Sound")
     parser.add_argument('-w', '--wav', type=str, default='cough.wav',help='Đường dẫn đến file wav chứa tiếng ho.')
