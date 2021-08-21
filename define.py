@@ -17,23 +17,6 @@ SILENCE = 0.0018
 SAMPLE_LENGTH = 0.5 #s
 SAMPLE_SIZE = int(np.ceil(SR*SAMPLE_LENGTH))
 NOISE_RATIO = 0.25
-
-def load_audio(path):
-    signal, rate = librosa.load(path, sr=SR)
-    mask = envelope(signal, rate, SILENCE)
-    signal = signal[mask]
-    return signal
-def melspectrogram(signal):
-    signal = librosa.util.normalize(signal)
-    spectro = librosa.feature.melspectrogram(
-        signal,
-        sr=SR,
-        n_mels=N_MELS,
-        n_fft=N_FFT
-    )
-    spectro = librosa.power_to_db(spectro)
-    spectro = spectro.astype(np.float32)
-    return spectro
 def graph_spectrogram(wav_file):
     #sound_info, frame_rate = get_wav_info(wav_file)
     sound_info, frame_rate = librosa.load(wav_file, mono=True)
@@ -43,13 +26,6 @@ def graph_spectrogram(wav_file):
     pylab.specgram(sound_info, NFFT=2048, Fs=frame_rate, Fc=0, noverlap=128, cmap='inferno', sides='default', mode='default', scale='dB')
     pylab.axis('off')
     pylab.savefig('huyremy.png')
-def get_wav_info(wav_file):
-    wav = wave.open(wav_file, 'r')
-    frames = wav.readframes(-1)
-    sound_info = pylab.fromstring(frames, 'int16')
-    frame_rate = wav.getframerate()
-    wav.close()
-    return sound_info, frame_rate
 def spec_wav():
     results = ['positive', 'negative']
     for res in results: 
@@ -96,6 +72,3 @@ def write_to_csv(filename='dataset.csv', dir_path='data'):
             with file:
                 writer = csv.writer(file)
                 writer.writerow(to_append.split())
-#graph_spectrogram('21.09_-21-thg-8.wav')
-#write_to_csv()
-#spec_wav()
