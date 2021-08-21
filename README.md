@@ -1,5 +1,7 @@
 # Cough2Spec
-Đầu tiên download cough.hdf5 tại đây.<br>
+Đầu tiên:<br> 
+git clone https://github.com/huyremy/AI-Cough-Detect-Virus.git
+Xong rồi download cough.hdf5 tại đây:<br>
 https://drive.google.com/file/d/1nmdwD4-PpcdE8nyg4c8QARtUfGfelhD1/view?usp=sharing <br>
 Xong rồi giải nén ra rồi save chung vào thư mục.<br>
 Xong rồi mở command line ra gõ như này:<br>
