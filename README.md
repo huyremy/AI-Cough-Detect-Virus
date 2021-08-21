@@ -1,3 +1,7 @@
 # Cough2Spec
-Đầu tiên chạy file def.py
-Xong rồi chạy file im.py.
+Đầu tiên download cough.zip tại đây 
+https://drive.google.com/file/d/1nmdwD4-PpcdE8nyg4c8QARtUfGfelhD1/view?usp=sharing <br>
+Xong rồi chạy file def.py <br>
+Xong rồi chạy file im.py<br>
+
+                                                                                      
