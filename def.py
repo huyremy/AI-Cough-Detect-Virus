@@ -70,6 +70,6 @@ def write_to_csv(filename='dataset.csv', dir_path='data'):
             with file:
                 writer = csv.writer(file)
                 writer.writerow(to_append.split())
-graph_spectrogram('1.wav')
+graph_spectrogram('cough.wav')
 #write_to_csv()
 #spec_wav()
