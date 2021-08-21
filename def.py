@@ -9,7 +9,6 @@ import csv
 import pathlib
 warnings.simplefilter("ignore", DeprecationWarning)
 warnings.filterwarnings('ignore')
-
 SR = 44000
 N_FFT = 2048
 HOP_LENGTH = 512
@@ -21,11 +20,9 @@ NOISE_RATIO = 0.25
 
 def graph_spectrogram(wav_file):
     sound_info, frame_rate = get_wav_info(wav_file)
-    pylab.figure(num=None, figsize=(10, 5))
-    pylab.subplot(111)
-    pylab.title('spectrogram of %r' % wav_file)
-    pylab.specgram(sound_info, Fs=frame_rate)
-    pylab.savefig('spec.png')
+    pylab.specgram(sound_info, NFFT=2048, Fs=frame_rate, Fc=0, noverlap=128, cmap='inferno', sides='default', mode='default', scale='dB')
+    pylab.axis('off')
+    pylab.savefig('file.png')
 def get_wav_info(wav_file):
     wav = wave.open(wav_file, 'r')
     frames = wav.readframes(-1)
@@ -34,7 +31,6 @@ def get_wav_info(wav_file):
     wav.close()
     return sound_info, frame_rate
 def spec_wav():
-    # create spec image from wav folder
     results = ['positive', 'negative']
     for res in results: 
         pathlib.Path(f"spectrograms/{res}").mkdir(parents=True, exist_ok=True)
@@ -47,7 +43,6 @@ def spec_wav():
             plt.savefig(f"spectrograms/{res}/{files[:-4]}.png")
             plt.clf()
 def write_to_csv(filename='dataset.csv', dir_path='data'):
-    #Create the header for the CSV File 
     header = 'filename ID chroma_stft rmse spectral_centroid spectral_bandwidth rolloff zero_crossing_rate'
     for x in range(1, 21):
         header += f" mfcc{x}"
@@ -80,7 +75,6 @@ def write_to_csv(filename='dataset.csv', dir_path='data'):
             with file:
                 writer = csv.writer(file)
                 writer.writerow(to_append.split())
-#graph_spectrogram('cough.wav')
-#get_wav_info('cough.wav')
+graph_spectrogram('cough.wav')
 #write_to_csv()
 #spec_wav()
