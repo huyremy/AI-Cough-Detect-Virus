@@ -5,8 +5,6 @@ import warnings
 import matplotlib.pyplot as plt
 import librosa
 import numpy as np
-import csv
-import pathlib
 import argparse
 from define import *
 from check import*
