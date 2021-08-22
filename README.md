@@ -7,3 +7,4 @@ Xong.
 # Video demo
 https://youtu.be/2laVV4I0z3k
 # Contact
+huynq@isi.com.vn
