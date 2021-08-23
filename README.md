@@ -5,7 +5,7 @@ git clone https://github.com/huyremy/AI-Cough-Detect-Virus.git <br>
 <li>Xong rồi mở command line ra gõ như này để ghi âm tiếng ho<br>
 python3 recorder.py<br>
 <li>Bắt đầu ho để máy ghi âm, máy sẽ ghi âm trong 5s. <br>
-Sau khi ghi âm xong gõ như này để kiểm tra âm tính hay dương tính:<br>
+<Sau khi ghi âm xong gõ như này để kiểm tra âm tính hay dương tính:<br>
 python3 detect.py -w recording0.wav<br>
 <li>Kiểm tra lại:<br>
 python3 detect.py -w recording1.wav.<br>
