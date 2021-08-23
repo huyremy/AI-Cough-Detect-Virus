@@ -1,4 +1,4 @@
-# Cough2Spec - AI-Cough-Detect-Virus
+# Cough2Spec CDV (AI - Cough Detect Virus)
 <div>
 <li>Đầu tiên:<br> 
 git clone https://github.com/huyremy/AI-Cough-Detect-Virus.git <br>
