@@ -11,7 +11,7 @@ python3 detect.py -w recording0.wav<br>
 python3 detect.py -w recording1.wav.<br>
 <Xong.<br>            
 <li>Test nhanh:<br>
-python3 recoder2.
+python3 recoder2.py
 </div>
 <h1>Video Demo</h1><br>
   https://youtu.be/2laVV4I0z3k
