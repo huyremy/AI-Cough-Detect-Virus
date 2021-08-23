@@ -13,5 +13,5 @@ Xong.<br>
 </div>
 <h1>Video Demo</h1><br>
   https://youtu.be/2laVV4I0z3k
-<h1>#Contact</h1><br>
+<h1>Contact</h1><br>
 huynq@isi.com.vn
