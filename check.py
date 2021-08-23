@@ -8,7 +8,7 @@ import matplotlib.image as mpimg
 import warnings
 warnings.simplefilter("ignore", DeprecationWarning)
 warnings.filterwarnings('ignore')
-cough = load_model('cough.hdf5')
+
 def output(model,img_path,size):
     img_path=img_path
     img = image.load_img(img_path,target_size=size)
