@@ -9,7 +9,9 @@ python3 recorder.py<br>
 python3 detect.py -w recording0.wav<br>
 <li>Kiểm tra lại:<br>
 python3 detect.py -w recording1.wav.<br>
-<Xong.<br>                                                                    
+<Xong.<br>            
+<li>Test nhanh:<br>
+python3 recoder2.
 </div>
 <h1>Video Demo</h1><br>
   https://youtu.be/2laVV4I0z3k
