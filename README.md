@@ -8,8 +8,8 @@ Sau khi ghi âm xong gõ như này để kiểm tra âm tính hay dương tính:
 python3 detect.py -w recording0.wav<br>
 <li>Kiểm tra lại:
 python3 detect.py -w recording1.wav.<br>
-Xong.                                                                      
-# Video demo
-https://youtu.be/2laVV4I0z3k
+Xong.<br>                                                                      
+# Video Demo
+  https://youtu.be/2laVV4I0z3k
 # Contact
 huynq@isi.com.vn
